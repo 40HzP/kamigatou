@@ -1,0 +1,34 @@
+# 死○がとう／神がとう診断
+
+https://kamigatou.40hzp.com
+
+良かれと思ってされた25の行動に1〜5で答えると、「ありがとう」の境界線と、あなたがどんな人かを返す診断。企画 40HzP。
+
+## 構成
+
+- `public/index.html` … 診断ページ本体（1ファイル完結。外部に送るデータは無し）
+- `public/og.png` … Xなどでリンクを貼ったときのプレビュー画像（1200×630）
+- `public/favicon.svg` … タブのアイコン
+- `wrangler.jsonc` … Cloudflare Workers の設定。`kamigatou.40hzp.com` への割り当てもここで行う
+
+ビルド工程は無し。`public/` の中身がそのまま配信される。
+
+## 公開手順（初回のみ・クリックのみ）
+
+1. Cloudflare ダッシュボード → Workers & Pages → 作成 → 「リポジトリをインポート」でこのリポジトリを選ぶ
+2. 設定
+   - ビルドコマンド：空欄
+   - デプロイコマンド：`npx wrangler deploy`
+   - ブランチ：`main`
+3. デプロイ。`wrangler.jsonc` の `routes` によって `kamigatou.40hzp.com` が自動で割り当てられる
+4. https://kamigatou.40hzp.com を開いて表示を確認
+
+以後は `main` に push するたびに自動で再デプロイされる。
+
+## 問題を直すとき
+
+`public/index.html` の `QUESTIONS` 配列を編集する。
+
+- `c` はカテゴリ番号（0 決定権／1 時間・予定／2 持ち物・空間／3 評価・助言／4 距離・接触）
+- `q` は画面に出す台詞、`s` は結果やシェアで使う短い言い方
+- 傾向タグ（`TRAITS`）は問題の並び順の番号で参照しているので、**既存の問題は途中に挿入せず末尾に足す**

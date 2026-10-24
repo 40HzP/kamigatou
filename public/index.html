@@ -1,0 +1,1120 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>死○がとう／神がとう診断</title>
+<meta name="description" content="良かれと思ってされたこと、あなたの「ありがとう」はどこまで本気？ 25の行動に1〜5で答えて、あなたの境界線を見つける診断です。">
+<link rel="canonical" href="https://kamigatou.40hzp.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="40HzP">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="死○がとう／神がとう診断">
+<meta property="og:description" content="良かれと思ってされたこと、あなたの「ありがとう」はどこまで本気？ 25の行動に1〜5で答えて、あなたの境界線を見つける診断です。">
+<meta property="og:url" content="https://kamigatou.40hzp.com/">
+<meta property="og:image" content="https://kamigatou.40hzp.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="死○がとう／神がとう診断。良かれと思ってされたこと、あなたの「ありがとう」はどこまで本気？">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@40HzP">
+<meta name="theme-color" content="#f3f4f7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#13141b" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+:root { padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+body { margin: 0; -webkit-text-size-adjust: 100%; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Zen+Maru+Gothic:wght@500;700;900&display=swap">
+<style>
+/* Layout: one narrow column, one screen at a time (intro → 25 questions → result). The result's centerpiece is a literal boundary line drawn through your ranked answers. */
+:root {
+  --paper: #f3f4f7;
+  --surface: #ffffff;
+  --ink: #1c1f2e;
+  --muted: #666b80;
+  --rule: #dadde6;
+  --kami: #b9800c;
+  --kami-soft: #f5e6c0;
+  --shi: #4b5080;
+  --shi-soft: #e0e2ef;
+  --line: #cf3a2c;
+  --font-display: "Dela Gothic One", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --font-body: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --radius: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #13141b; --surface: #1c1e28; --ink: #eceef6; --muted: #9ca1b6; --rule: #2d3040;
+    --kami: #e4b444; --kami-soft: #3a2f16; --shi: #a6abd8; --shi-soft: #262a42; --line: #ff6b5d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #13141b; --surface: #1c1e28; --ink: #eceef6; --muted: #9ca1b6; --rule: #2d3040;
+  --kami: #e4b444; --kami-soft: #3a2f16; --shi: #a6abd8; --shi-soft: #262a42; --line: #ff6b5d;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.7;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 28px 40px;
+}
+.wrap { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+h1, h2, h3 { margin: 0; text-wrap: balance; }
+p { margin: 0; }
+button { font: inherit; color: inherit; }
+button:focus-visible, a:focus-visible { outline: 3px solid var(--kami); outline-offset: 3px; }
+
+.brand { font-size: 12px; letter-spacing: 0.14em; color: var(--muted); display: flex; justify-content: space-between; align-items: center; }
+
+/* Title: 死○ in cold ink, 神 in gold */
+.title { font-family: var(--font-display); font-weight: 400; font-size: clamp(30px, 8.4vw, 44px); line-height: 1.25; letter-spacing: 0.01em; }
+.title .shi { color: var(--shi); }
+.title .kami { color: var(--kami); }
+.title .slash { color: var(--muted); font-size: 0.7em; padding-inline: 0.08em; }
+
+.lead { font-size: 16px; color: var(--ink); max-width: 34em; }
+.meta { font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
+
+/* The quoted action — the subject's own material is a line someone said to you */
+.bubble {
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 22px 22px 24px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.speaker { font-size: 12px; letter-spacing: 0.12em; color: var(--muted); display: flex; gap: 10px; align-items: center; }
+.chip { font-size: 11px; letter-spacing: 0.08em; padding: 2px 10px; border-radius: 999px; background: var(--shi-soft); color: var(--shi); }
+.quote { font-size: clamp(20px, 5.4vw, 25px); font-weight: 700; line-height: 1.55; }
+.quote::before { content: "「"; color: var(--muted); margin-left: -0.5em; }
+.quote::after { content: "」"; color: var(--muted); }
+
+.ask { font-size: 14px; color: var(--muted); }
+
+/* Scale: five steps blended from 死○ to 神 */
+.scale { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.step {
+  --c: var(--shi);
+  appearance: none; border: 2px solid color-mix(in oklab, var(--c) 45%, var(--rule));
+  background: var(--surface); border-radius: 12px; min-height: 58px;
+  font-size: 22px; font-weight: 900; color: var(--c); cursor: pointer;
+  font-variant-numeric: tabular-nums;
+  transition: transform .12s ease, background .12s ease, color .12s ease;
+}
+.step[data-v="1"] { --c: var(--shi); }
+.step[data-v="2"] { --c: color-mix(in oklab, var(--shi) 75%, var(--kami)); }
+.step[data-v="3"] { --c: color-mix(in oklab, var(--shi) 50%, var(--kami)); }
+.step[data-v="4"] { --c: color-mix(in oklab, var(--shi) 25%, var(--kami)); }
+.step[data-v="5"] { --c: var(--kami); }
+.step:hover { transform: translateY(-2px); }
+.step[aria-pressed="true"] { background: var(--c); color: var(--surface); border-color: var(--c); }
+.ends { display: flex; justify-content: space-between; font-size: 13px; font-weight: 700; margin-top: -14px; }
+.ends .l { color: var(--shi); }
+.ends .r { color: var(--kami); }
+
+.row { display: flex; gap: 12px; align-items: center; justify-content: space-between; flex-wrap: wrap; }
+.primary {
+  appearance: none; border: 0; cursor: pointer;
+  background: var(--ink); color: var(--paper);
+  font-weight: 700; font-size: 17px; letter-spacing: 0.04em;
+  padding: 15px 28px; border-radius: 999px;
+}
+.ghost {
+  appearance: none; border: 1px solid var(--rule); background: transparent; cursor: pointer;
+  font-size: 14px; font-weight: 700; padding: 9px 16px; border-radius: 999px; color: var(--ink); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.ghost[disabled] { opacity: .35; cursor: default; }
+
+.progress { display: flex; flex-direction: column; gap: 8px; }
+.bar { height: 4px; background: var(--rule); border-radius: 4px; overflow: hidden; }
+.bar > i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--shi), var(--kami)); transition: width .25s ease; }
+.count { font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; letter-spacing: 0.06em; }
+
+/* Result */
+.verdict { display: flex; flex-direction: column; gap: 14px; }
+.verdict .label { font-size: 13px; letter-spacing: 0.14em; color: var(--muted); }
+.pair { display: flex; flex-direction: column; gap: 0; }
+.pair .above, .pair .below { font-family: var(--font-display); font-size: clamp(22px, 6vw, 30px); line-height: 1.35; }
+.pair .above { color: var(--kami); }
+.pair .below { color: var(--shi); }
+.pair .cut { display: flex; align-items: center; gap: 10px; color: var(--line); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; padding-block: 6px; }
+.pair .cut::before, .pair .cut::after { content: ""; flex: 1; border-top: 2px dashed var(--line); }
+.verdict .tail { font-size: 15px; }
+
+.tally { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.tally div { background: var(--surface); border: 1px solid var(--rule); border-radius: 12px; padding: 12px 10px; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.tally b { font-size: 26px; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1.2; }
+.tally span { font-size: 12px; color: var(--muted); }
+.tally .k b { color: var(--kami); }
+.tally .s b { color: var(--shi); }
+
+h2.sec { font-size: 15px; font-weight: 900; letter-spacing: 0.08em; display: flex; align-items: baseline; gap: 10px; }
+h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-spacing: 0.04em; }
+
+.ladder { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+.ladder li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: center; font-size: 14.5px; }
+.ladder .sc {
+  width: 34px; height: 28px; border-radius: 8px; display: grid; place-items: center;
+  font-weight: 900; font-variant-numeric: tabular-nums; font-size: 14px;
+}
+.ladder .t { min-width: 0; }
+.ladder li.divider { display: flex; align-items: center; gap: 10px; color: var(--line); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; padding-block: 6px; }
+.ladder li.divider::before, .ladder li.divider::after { content: ""; flex: 1; border-top: 2px dashed var(--line); }
+
+.cats { display: flex; flex-direction: column; gap: 12px; }
+.cat { display: grid; grid-template-columns: 6.2em 1fr 2.6em; gap: 10px; align-items: center; font-size: 14px; }
+.cat .name { font-weight: 700; }
+.cat .track { position: relative; height: 10px; border-radius: 10px; background: linear-gradient(90deg, var(--shi-soft), var(--kami-soft)); }
+.cat .track::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; border-left: 2px dashed var(--line); opacity: .7; }
+.cat .dot { position: absolute; top: 50%; width: 18px; height: 18px; border-radius: 50%; transform: translate(-50%, -50%); border: 3px solid var(--surface); box-shadow: 0 0 0 1px var(--rule); }
+.cat .num { text-align: right; font-weight: 900; font-variant-numeric: tabular-nums; }
+.cat-ends { display: grid; grid-template-columns: 6.2em 1fr 2.6em; gap: 10px; font-size: 11px; color: var(--muted); }
+.cat-ends span:nth-child(2) { display: flex; justify-content: space-between; }
+.notes { font-size: 14px; display: flex; flex-direction: column; gap: 4px; }
+.notes b { font-weight: 900; }
+
+.panel { background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 18px; display: flex; flex-direction: column; gap: 14px; }
+.share-text { width: 100%; min-height: 96px; resize: vertical; font: inherit; font-size: 14px; line-height: 1.6; padding: 12px; border-radius: 10px; border: 1px solid var(--rule); background: var(--paper); color: var(--ink); }
+.toast { font-size: 13px; color: var(--muted); min-height: 1.4em; }
+.preview { margin: 0; display: flex; flex-direction: column; gap: 8px; }
+.preview .frame { max-height: 72vh; overflow: auto; border-radius: 12px; border: 1px solid var(--rule); }
+.preview img { display: block; width: 100%; max-width: 100%; height: auto; }
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 999px; background: var(--paper); border: 1px solid var(--rule); align-self: flex-start; }
+.tabs button { appearance: none; border: 0; background: transparent; cursor: pointer; font-size: 13px; font-weight: 700; padding: 6px 14px; border-radius: 999px; color: var(--muted); }
+.tabs button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.preview figcaption { font-size: 12.5px; color: var(--muted); }
+
+/* Profile: who you are */
+.profile { gap: 16px; }
+.profile .eyebrow { font-size: 12px; letter-spacing: 0.14em; color: var(--muted); }
+.profile .type { font-family: var(--font-display); font-weight: 400; font-size: clamp(24px, 6.6vw, 32px); line-height: 1.3; }
+.profile .guard { font-size: 14px; color: var(--muted); }
+.profile .guard b { color: var(--ink); font-weight: 900; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { font-size: 12.5px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+.chips .k { background: var(--kami-soft); color: var(--kami); }
+.chips .s { background: var(--shi-soft); color: var(--shi); }
+.prose { display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.85; max-width: 36em; }
+.tip { border-top: 1px dashed var(--rule); padding-top: 14px; display: flex; flex-direction: column; gap: 4px; }
+.tip .h { font-size: 12px; letter-spacing: 0.12em; color: var(--muted); }
+.tip p { font-size: 15px; font-weight: 700; }
+
+.foot { font-size: 12px; color: var(--muted); text-align: center; letter-spacing: 0.08em; padding-top: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="brand"><span>40HzP</span><span>全25問</span></div>
+
+  <!-- 1. Intro -->
+  <section id="intro" class="wrap" style="gap:22px">
+    <h1 class="title"><span class="shi">死○がとう</span><span class="slash">／</span><span class="kami">神がとう</span>診断</h1>
+    <p class="lead">良かれと思ってされたこと。あなたの「ありがとう」は、どこまでが神がとうで、どこからが死○がとう？　25の行動に1〜5で答えると、あなたの境界線が見つかります。</p>
+
+    <div class="bubble" aria-label="問題の例">
+      <div class="speaker"><span>例</span><span class="chip">決定権</span></div>
+      <p class="quote">今日のデートの行き先と時間全部決めてきたよ</p>
+    </div>
+    <div class="scale" aria-hidden="true">
+      <span class="step" data-v="1" style="display:grid;place-items:center">1</span>
+      <span class="step" data-v="2" style="display:grid;place-items:center">2</span>
+      <span class="step" data-v="3" style="display:grid;place-items:center">3</span>
+      <span class="step" data-v="4" style="display:grid;place-items:center">4</span>
+      <span class="step" data-v="5" style="display:grid;place-items:center">5</span>
+    </div>
+    <div class="ends"><span class="l">1　死○がとう</span><span class="r">神がとう　5</span></div>
+
+    <div class="row">
+      <button id="start" class="primary" type="button">診断をはじめる</button>
+      <span class="meta">約3分　・　回答はどこにも送信されません</span>
+    </div>
+  </section>
+
+  <!-- 2. Quiz -->
+  <section id="quiz" class="wrap" style="gap:22px" hidden>
+    <div class="progress">
+      <div class="row"><span class="count" id="count">1 / 25</span><span class="chip" id="cat">決定権</span></div>
+      <div class="bar"><i id="barfill"></i></div>
+    </div>
+    <div class="bubble">
+      <div class="speaker">相手が良かれと思って</div>
+      <p class="quote" id="quote" aria-live="polite"></p>
+    </div>
+    <p class="ask">あなたの「ありがとう」は？</p>
+    <div class="scale" id="scale" role="group" aria-label="1は死○がとう、5は神がとう">
+      <button class="step" type="button" data-v="1" id="s1">1</button>
+      <button class="step" type="button" data-v="2" id="s2">2</button>
+      <button class="step" type="button" data-v="3" id="s3">3</button>
+      <button class="step" type="button" data-v="4" id="s4">4</button>
+      <button class="step" type="button" data-v="5" id="s5">5</button>
+    </div>
+    <div class="ends"><span class="l">1　死○がとう</span><span class="r">神がとう　5</span></div>
+    <div class="row">
+      <button id="back" class="ghost" type="button">← ひとつ戻る</button>
+      <span class="meta">キーボードの1〜5でも答えられます</span>
+    </div>
+  </section>
+
+  <!-- 3. Result -->
+  <section id="result" class="wrap" style="gap:28px" hidden>
+    <div class="verdict">
+      <span class="label">あなたの境界線は</span>
+      <div class="pair" id="pair"></div>
+      <p class="tail" id="tail"></p>
+    </div>
+
+    <div class="panel profile" id="profile">
+      <span class="eyebrow">あなたはこんな人</span>
+      <h2 class="type" id="ptype"></h2>
+      <p class="guard" id="pguard"></p>
+      <div class="chips" id="pchips"></div>
+      <div class="prose" id="pprose"></div>
+      <div class="tip">
+        <span class="h">あなたに良かれと思って何かするなら</span>
+        <p id="ptip"></p>
+      </div>
+    </div>
+
+    <div class="tally" id="tally"></div>
+
+    <div class="wrap" style="gap:14px">
+      <h2 class="sec">境界線<small>点数の高い順に並べています</small></h2>
+      <ol class="ladder" id="ladder"></ol>
+    </div>
+
+    <div class="wrap" style="gap:14px">
+      <h2 class="sec">カテゴリ別<small>平均点・点線が3</small></h2>
+      <div class="cats" id="cats"></div>
+      <div class="notes" id="notes"></div>
+    </div>
+
+    <div class="panel">
+      <h2 class="sec">結果をシェア</h2>
+      <figure class="preview" id="preview" hidden>
+        <div class="tabs" role="group" aria-label="画像の種類">
+          <button type="button" id="tabcard" aria-pressed="true">シェア用</button>
+          <button type="button" id="tabfull" aria-pressed="false">結果全体</button>
+        </div>
+        <div class="frame"><img id="previewimg" alt="診断結果の画像"></div>
+        <figcaption id="previewcap"></figcaption>
+      </figure>
+      <textarea class="share-text" id="sharetext" aria-label="シェア用の文章"></textarea>
+      <div class="row" style="justify-content:flex-start">
+        <button class="ghost" id="saveimg" type="button" hidden>画像を保存</button>
+        <button class="ghost" id="shareimg" type="button" hidden>画像を共有</button>
+        <a class="ghost" id="xlink" href="#" target="_blank" rel="noopener">Xでポストする</a>
+        <button class="ghost" id="copy" type="button">文章をコピー</button>
+        <button class="ghost" id="again" type="button">もう一度やる</button>
+      </div>
+      <p class="toast" id="toast" aria-live="polite"></p>
+    </div>
+  </section>
+
+  <p class="foot">企画　40HzP</p>
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var SITE_URL = "https://kamigatou.40hzp.com/";
+  var CATS = ["決定権", "時間・予定", "持ち物・空間", "評価・助言", "距離・接触"];
+
+  // q: the line someone says to you / s: short label for result and sharing / c: category index
+  var QUESTIONS = [
+    { c: 0, q: "今日のデートの行き先と時間全部決めてきたよ", s: "デートの予定を全部決める" },
+    { c: 0, q: "迷ってたみたいだから、先に注文しといたよ（いつものやつ）", s: "いつもの注文を先に頼む" },
+    { c: 0, q: "体調悪そうだったから、上司に休むって連絡しといたよ", s: "休みの連絡を代わりにする" },
+    { c: 0, q: "飲み会の店、みんなの分コースで予約しといたよ", s: "飲み会をコースで予約する" },
+    { c: 1, q: "誕生日、サプライズで友達10人家に呼んどいたよ", s: "サプライズで10人家に呼ぶ" },
+    { c: 1, q: "寝坊しないように朝6時にモーニングコールしたよ", s: "朝6時のモーニングコール" },
+    { c: 1, q: "暇そうだったから週末の予定入れといたよ", s: "週末の予定を入れておく" },
+    { c: 1, q: "終電逃さないように、飲み会の途中で迎えに来たよ", s: "飲み会の途中で迎えに来る" },
+    { c: 2, q: "部屋散らかってたから片付けといたよ（いくつか捨てた）", s: "部屋を片付けて捨てる" },
+    { c: 2, q: "好きって言ってたバンドのグッズ、全種買ってきたよ", s: "グッズを全種買ってくる" },
+    { c: 2, q: "お土産に木彫りの熊買ってきたよ", s: "お土産に木彫りの熊" },
+    { c: 2, q: "冷蔵庫空っぽだったから作り置き10品入れといたよ", s: "作り置きを10品入れる" },
+    { c: 3, q: "髪切ったんだ、前のほうが似合ってたって正直に言うね", s: "前の髪型のほうがいいと言う" },
+    { c: 3, q: "愚痴聞いたから、解決策3つ考えてきたよ", s: "愚痴に解決策を3つ返す" },
+    { c: 3, q: "LINEの文面、誤字あったから教えとくね", s: "LINEの誤字を教える" },
+    { c: 3, q: "その服ちょっと若すぎない？って先に言っとくね", s: "服が若すぎないかと言う" },
+    { c: 4, q: "既読のまま返信なかったから電話したよ", s: "既読スルーに電話する" },
+    { c: 4, q: "帰り道暗いから家の前まで送るよ", s: "家の前まで送る" },
+    { c: 4, q: "落ち込んでそうだったから、アポなしで家に来たよ", s: "アポなしで家に来る" },
+    { c: 4, q: "誕生日、SNSで写真付きでお祝い投稿しといたよ", s: "写真付きでお祝い投稿する" },
+    // Added later: one more per category (kept at the end so trait indices stay fixed)
+    { c: 0, q: "髪型迷ってたから、美容師さんに「おまかせで」って伝えといたよ", s: "美容師におまかせと伝える" },
+    { c: 1, q: "遅刻しがちだから、待ち合わせ時間30分早めに伝えといたよ", s: "待ち合わせを30分早く伝える" },
+    { c: 2, q: "洗濯物、ついでに畳んでタンスにしまっといたよ", s: "洗濯物を畳んでしまう" },
+    { c: 3, q: "その人とは付き合わないほうがいいって、はっきり言っとくね", s: "付き合わないほうがいいと言う" },
+    { c: 4, q: "元気なさそうだったから、ぎゅってハグしたよ", s: "元気がないときにハグする" }
+  ];
+
+  // Overall stance, decided by the mean of all answers
+  var STANCE = {
+    open: {
+      name: "受け取り上手",
+      text: "相手の善意を、まず善意として受け取れる人です。多少ずれていても「やってくれた」ことのほうが先に来るので、周りは安心してあなたの世話を焼けます。そのぶん、本当に嫌なことを言い出すタイミングを逃しやすいかもしれません。"
+    },
+    select: {
+      name: "選んで受け取る人",
+      text: "善意なら何でもうれしいわけではなく、中身を見て受け取るかどうかを決める人です。全部を断るわけでも、全部を飲み込むわけでもない。だからあなたの「ありがとう」は、相手にとって信用できる合図になっています。"
+    },
+    closed: {
+      name: "気持ちだけ受け取る人",
+      text: "善意の「気持ち」と「行動」をはっきり分けて考える人です。良かれと思ってくれたことはわかっている。でも、それとこれとは別。自分のことは自分でやりたい感覚が強く、先回りされるほど居心地が悪くなります。"
+    }
+  };
+
+  // Per category: what the strictest one says about you, what the loosest one says, and a tip for others
+  var CAT_TEXT = [
+    {
+      guard: "決めるのは自分",
+      strict: "いちばん線がはっきりしているのは「決定権」。結果が同じでも、自分で選んだかどうかが大事な人です。決めてくれた中身より、「決めさせてもらえなかった」ことのほうが心に残ります。",
+      loose: "逆に「決定権」はゆるめで、任せられるところは任せたい人。決める手間を引き受けてくれる人には、素直に感謝できます。",
+      tip: "「どうする？」と一言聞く。それだけで神がとうに変わります。"
+    },
+    {
+      guard: "自分の時間は自分のもの",
+      strict: "いちばん線がはっきりしているのは「時間・予定」。予定を空けているのは暇だからではなく、空けておきたいから。自分の時間に他人の善意が入り込むと、中身に関係なく窮屈さを感じます。",
+      loose: "逆に「時間・予定」はゆるめ。誘われたり起こされたりするのは、むしろ歓迎です。",
+      tip: "予定を入れる前に、空いているかではなく、空けておきたいかを聞く。"
+    },
+    {
+      guard: "自分の陣地は自分で管理",
+      strict: "いちばん線がはっきりしているのは「持ち物・空間」。部屋や持ち物には、あなたにしかわからない秩序があります。物を増やされるのも減らされるのも、陣地を動かされる感覚に近いはずです。",
+      loose: "逆に「持ち物・空間」はゆるめ。もらい物や手間をかけてくれた物は、形より気持ちで受け取れます。",
+      tip: "片付ける前、買う前に、どこまで触っていいかを聞く。"
+    },
+    {
+      guard: "正しさより、まず気持ち",
+      strict: "いちばん線がはっきりしているのは「評価・助言」。正しいことを言われるより、先に気持ちを受け止めてほしい人です。指摘の中身が合っていても、順番を間違えると死○がとうに転びます。",
+      loose: "逆に「評価・助言」はゆるめ。耳の痛いことでも、言ってくれる人を味方だと思えるタイプです。",
+      tip: "アドバイスの前に「それは大変だったね」を一回挟む。"
+    },
+    {
+      guard: "近づくのはこちらから",
+      strict: "いちばん線がはっきりしているのは「距離・接触」。人との距離は自分のペースで詰めたい人です。心配や優しさからでも、向こうから距離を詰められると身構えてしまいます。",
+      loose: "逆に「距離・接触」はゆるめ。会いに来てくれる、送ってくれるといった、近い優しさに弱い人です。",
+      tip: "会いに行く前に、連絡を一本入れる。"
+    }
+  ];
+
+  // Trait tags from single questions that split people cleanly: [question index, tag at 4-5, tag at 1-2]
+  var TRAITS = [
+    [13, "解決策がほしい派", "まず共感してほしい派"],
+    [0, "リードされたい派", "一緒に決めたい派"],
+    [4, "サプライズ歓迎", "サプライズは苦手"],
+    [12, "正直に言ってほしい派", "言わなくていい派"],
+    [16, "心配されるとうれしい", "追いかけられると重い"],
+    [8, "片付けてもらえると助かる", "自分の物は自分で"]
+  ];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var order = [];
+  var answers = {};
+  var idx = 0;
+  var locked = false;
+
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function show(id) {
+    ["intro", "quiz", "result"].forEach(function (k) { $(k).hidden = (k !== id); });
+    window.scrollTo(0, 0);
+  }
+
+  function start() {
+    order = shuffle(QUESTIONS.map(function (_, i) { return i; }));
+    answers = {};
+    idx = 0;
+    show("quiz");
+    render();
+  }
+
+  function render() {
+    var q = QUESTIONS[order[idx]];
+    $("quote").textContent = q.q;
+    $("cat").textContent = CATS[q.c];
+    $("count").textContent = (idx + 1) + " / " + QUESTIONS.length;
+    $("barfill").style.width = (idx / QUESTIONS.length * 100) + "%";
+    var cur = answers[order[idx]];
+    for (var v = 1; v <= 5; v++) {
+      $("s" + v).setAttribute("aria-pressed", cur === v ? "true" : "false");
+    }
+    $("back").disabled = idx === 0;
+  }
+
+  function answer(v) {
+    if (locked) return;
+    answers[order[idx]] = v;
+    for (var k = 1; k <= 5; k++) $("s" + k).setAttribute("aria-pressed", k === v ? "true" : "false");
+    locked = true;
+    setTimeout(function () {
+      locked = false;
+      if (idx < QUESTIONS.length - 1) { idx++; render(); }
+      else { $("barfill").style.width = "100%"; finish(); }
+    }, 180);
+  }
+
+  function back() {
+    if (idx > 0 && !locked) { idx--; render(); }
+  }
+
+  function scoreColor(v) {
+    var pct = (v - 1) * 25; // 0 = 死○, 100 = 神
+    return "color-mix(in oklab, var(--shi) " + (100 - pct) + "%, var(--kami))";
+  }
+
+  function finish() {
+    // Rank: high score first; ties keep the category order so results are stable
+    var ranked = QUESTIONS.map(function (q, i) { return { i: i, q: q, v: answers[i] }; })
+      .sort(function (a, b) { return b.v - a.v || a.i - b.i; });
+
+    var above = ranked.filter(function (r) { return r.v >= 3; });
+    var below = ranked.filter(function (r) { return r.v <= 2; });
+    var kami = ranked.filter(function (r) { return r.v >= 4; }).length;
+    var mid = ranked.filter(function (r) { return r.v === 3; }).length;
+    var shi = below.length;
+
+    // Verdict: the two actions that sit on either side of the line
+    var pair = $("pair");
+    pair.textContent = "";
+    var shareLine;
+    if (above.length && below.length) {
+      var a = above[above.length - 1], b = below[0];
+      pair.appendChild(el("span", "above", "「" + a.q.s + "」"));
+      pair.appendChild(el("span", "cut", "ここから死○がとう"));
+      pair.appendChild(el("span", "below", "「" + b.q.s + "」"));
+      $("tail").textContent = "のあいだにあります。";
+      shareLine = "私の境界線は「" + a.q.s + "」と「" + b.q.s + "」のあいだでした";
+    } else if (!below.length) {
+      pair.appendChild(el("span", "above", "見つかりませんでした"));
+      $("tail").textContent = QUESTIONS.length + "問すべてが3点以上。どんな善意もありがとうで受け取れる人です。";
+      shareLine = "私の境界線は見つかりませんでした（全部ありがとう）";
+    } else {
+      pair.appendChild(el("span", "cut", "ここから死○がとう"));
+      pair.appendChild(el("span", "below", "1問目から"));
+      $("tail").textContent = QUESTIONS.length + "問すべてが2点以下。良かれと思っての行動は、全部いりません。";
+      shareLine = "私の境界線は1問目でした（全部死○がとう）";
+    }
+
+    // Tally
+    var tally = $("tally");
+    tally.textContent = "";
+    [["k", kami, "神がとう（4〜5）"], ["", mid, "どちらでもない（3）"], ["s", shi, "死○がとう（1〜2）"]].forEach(function (t) {
+      var d = el("div", t[0]);
+      d.appendChild(el("b", "", String(t[1])));
+      d.appendChild(el("span", "", t[2]));
+      tally.appendChild(d);
+    });
+
+    // Ladder with the boundary drawn in
+    var ladder = $("ladder");
+    ladder.textContent = "";
+    var drawn = false;
+    ranked.forEach(function (r) {
+      if (!drawn && r.v <= 2 && above.length) {
+        ladder.appendChild(el("li", "divider", "ここから死○がとう"));
+        drawn = true;
+      }
+      var li = el("li");
+      var sc = el("span", "sc", String(r.v));
+      sc.style.background = scoreColor(r.v);
+      sc.style.color = "var(--surface)";
+      li.appendChild(sc);
+      li.appendChild(el("span", "t", r.q.s));
+      ladder.appendChild(li);
+    });
+
+    // Category averages
+    var cats = $("cats");
+    cats.textContent = "";
+    var avgs = CATS.map(function (name, c) {
+      var vs = QUESTIONS.map(function (q, i) { return q.c === c ? answers[i] : null; }).filter(function (v) { return v != null; });
+      var avg = vs.reduce(function (s, v) { return s + v; }, 0) / vs.length;
+      return { name: name, avg: avg };
+    });
+    avgs.forEach(function (a) {
+      var row = el("div", "cat");
+      row.appendChild(el("span", "name", a.name));
+      var track = el("span", "track");
+      var dot = el("span", "dot");
+      dot.style.left = ((a.avg - 1) / 4 * 100) + "%";
+      dot.style.background = scoreColor(a.avg);
+      track.appendChild(dot);
+      row.appendChild(track);
+      row.appendChild(el("span", "num", a.avg.toFixed(1)));
+      cats.appendChild(row);
+    });
+    var ends = el("div", "cat-ends");
+    ends.appendChild(el("span", "", ""));
+    var mid2 = el("span");
+    mid2.appendChild(el("span", "", "1 死○がとう"));
+    mid2.appendChild(el("span", "", "神がとう 5"));
+    ends.appendChild(mid2);
+    ends.appendChild(el("span", "", ""));
+    cats.appendChild(ends);
+
+    var sorted = avgs.slice().sort(function (x, y) { return x.avg - y.avg; });
+    var notes = $("notes");
+    notes.textContent = "";
+    var strict = sorted[0], loose = sorted[sorted.length - 1];
+    var p1 = el("p"); p1.append("いちばん譲れないのは "); p1.appendChild(el("b", "", "「" + strict.name + "」")); p1.append("（平均 " + strict.avg.toFixed(1) + "）");
+    var p2 = el("p"); p2.append("いちばん寛容なのは "); p2.appendChild(el("b", "", "「" + loose.name + "」")); p2.append("（平均 " + loose.avg.toFixed(1) + "）");
+    notes.appendChild(p1);
+    if (loose.avg !== strict.avg) notes.appendChild(p2);
+
+    // Profile: who you are
+    var all = QUESTIONS.map(function (_, i) { return answers[i]; });
+    var mean = all.reduce(function (s, v) { return s + v; }, 0) / all.length;
+    var stance = mean >= 3.6 ? STANCE.open : (mean <= 2.4 ? STANCE.closed : STANCE.select);
+    var spread = loose.avg - strict.avg;
+    var strictCat = CATS.indexOf(strict.name);
+    var looseCat = CATS.indexOf(loose.name);
+    var hasShape = spread >= 0.75;
+
+    $("ptype").textContent = stance.name;
+    var guard = $("pguard");
+    guard.textContent = "";
+    if (hasShape) {
+      guard.append("守っているのは ");
+      guard.appendChild(el("b", "", "「" + strict.name + "」"));
+      guard.append("　" + CAT_TEXT[strictCat].guard);
+    } else {
+      guard.textContent = "どの種類の善意にも、同じ物差しを当てる人";
+    }
+
+    var chips = $("pchips");
+    chips.textContent = "";
+    TRAITS.forEach(function (t) {
+      var v = answers[t[0]];
+      if (v >= 4) chips.appendChild(el("span", "k", t[1]));
+      else if (v <= 2) chips.appendChild(el("span", "s", t[2]));
+    });
+    chips.hidden = !chips.children.length;
+
+    var prose = $("pprose");
+    prose.textContent = "";
+    prose.appendChild(el("p", "", stance.text));
+    if (hasShape) {
+      prose.appendChild(el("p", "", CAT_TEXT[strictCat].strict));
+      if (loose.avg >= 3) prose.appendChild(el("p", "", CAT_TEXT[looseCat].loose));
+    } else {
+      prose.appendChild(el("p", "", "カテゴリごとの差が小さく、何をされたかで点数がほとんど変わりません。あなたの「ありがとう」を左右しているのは、行動の種類より、誰にされたか、どんな場面だったかのほうかもしれません。"));
+    }
+
+    // The one answer that stands out most from its own category
+    var odd = null;
+    QUESTIONS.forEach(function (q, i) {
+      var catAvg = avgs[q.c].avg;
+      var dev = answers[i] - catAvg;
+      if (!odd || Math.abs(dev) > Math.abs(odd.dev)) odd = { q: q, v: answers[i], avg: catAvg, dev: dev };
+    });
+    if (odd && Math.abs(odd.dev) >= 1.5) {
+      prose.appendChild(el("p", "",
+        "「" + CATS[odd.q.c] + "」全体の平均は" + odd.avg.toFixed(1) + "なのに、「" + odd.q.s + "」だけは" + odd.v + "点。" +
+        (odd.dev > 0 ? "この一問には、理屈より先に許せる何かがありそうです。" : "この一問だけは、どうしても譲れない理由がありそうです。")));
+    }
+
+    var tip;
+    if (hasShape) tip = CAT_TEXT[strictCat].tip;
+    else if (stance === STANCE.open) tip = "遠慮はいりません。ただ、ときどき本音を聞いてあげてください。";
+    else if (stance === STANCE.closed) tip = "何かする前に、まず「手伝おうか？」と聞く。";
+    else tip = "何をするかより先に、一言聞く。";
+    $("ptip").textContent = tip;
+
+    // Share
+    var text = "死○がとう／神がとう診断\n私は「" + stance.name + "」\n" + shareLine + "\n#40HzP #死○がとう神がとう診断";
+    $("sharetext").value = text;
+    $("xlink").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(SITE_URL);
+    $("toast").textContent = "";
+
+    show("result");
+
+    // Result image
+    var chipList = [];
+    TRAITS.forEach(function (t) {
+      var v = answers[t[0]];
+      if (v >= 4) chipList.push({ t: t[1], k: true });
+      else if (v <= 2) chipList.push({ t: t[2], k: false });
+    });
+    makeCard({
+      type: stance.name,
+      guard: hasShape ? ["守っているのは「" + strict.name + "」", CAT_TEXT[strictCat].guard] : ["どの種類の善意にも", "同じ物差しを当てる人"],
+      chips: chipList,
+      above: (above.length && below.length) ? above[above.length - 1].q.s : null,
+      below: (above.length && below.length) ? below[0].q.s : null,
+      allOk: !below.length,
+      avgs: avgs,
+      tail: $("tail").textContent,
+      prose: Array.prototype.map.call(prose.children, function (p) { return p.textContent; }),
+      tip: tip,
+      tally: { kami: kami, mid: mid, shi: shi },
+      ranked: ranked.map(function (r) { return { s: r.q.s, v: r.v }; }),
+      split: above.length > 0,
+      notes: Array.prototype.map.call(notes.children, function (p) { return p.textContent; })
+    });
+  }
+
+  // ---------- Result image (drawn on canvas, fixed light palette) ----------
+  var blobs = { card: null, full: null };
+  var urls = {};
+  var view = "card";
+  var IMG = {
+    paper: "#eef0f4", surface: "#ffffff", ink: "#1c1f2e", muted: "#666b80", rule: "#dadde6",
+    kami: [185, 128, 12], kamiSoft: "#f5e6c0", shi: [75, 80, 128], shiSoft: "#e0e2ef", line: "#cf3a2c"
+  };
+  var F_DISP = '"Dela Gothic One", "Hiragino Sans", "Yu Gothic", sans-serif';
+  var F_BODY = '"Zen Maru Gothic", "Hiragino Maru Gothic ProN", "Hiragino Sans", sans-serif';
+
+  function rgb(a) { return "rgb(" + a[0] + "," + a[1] + "," + a[2] + ")"; }
+  function mixScore(v) {
+    var t = (v - 1) / 4;
+    return "rgb(" + [0, 1, 2].map(function (k) { return Math.round(IMG.shi[k] + (IMG.kami[k] - IMG.shi[k]) * t); }).join(",") + ")";
+  }
+  function rr(g, x, y, w, h, r) {
+    g.beginPath();
+    g.moveTo(x + r, y);
+    g.arcTo(x + w, y, x + w, y + h, r);
+    g.arcTo(x + w, y + h, x, y + h, r);
+    g.arcTo(x, y + h, x, y, r);
+    g.arcTo(x, y, x + w, y, r);
+    g.closePath();
+  }
+  function fit(g, text, weight, family, size, maxW) {
+    var s = size;
+    do { g.font = weight + " " + s + "px " + family; s -= 2; } while (g.measureText(text).width > maxW && s > 18);
+  }
+
+  function makeCard(d) {
+    Object.keys(urls).forEach(function (k) { URL.revokeObjectURL(urls[k]); });
+    urls = {};
+    blobs = { card: null, full: null };
+    $("preview").hidden = true;
+    var fonts = document.fonts && document.fonts.load ? Promise.all([
+      document.fonts.load('400 60px "Dela Gothic One"', "死神診断「」"),
+      document.fonts.load('700 30px "Zen Maru Gothic"', "あ"),
+      document.fonts.load('900 30px "Zen Maru Gothic"', "あ")
+    ]).catch(function () {}) : Promise.resolve();
+
+    fonts.then(function () {
+      var cv = drawCard(d);
+      cv.toBlob(function (blob) { if (blob) { blobs.card = blob; refreshPreview(); } }, "image/png");
+      drawFull(d).toBlob(function (blob) { if (blob) { blobs.full = blob; refreshPreview(); } }, "image/png");
+    });
+  }
+
+  // Share card: the "あなたはこんな人" section on a fixed 1080×1350 card.
+  // Long explanations shrink the prose until everything fits; the card only grows past 1350 as a last resort.
+  function drawCard(d) {
+    var W = 1080, BASE_H = 1350, x = 120, maxW = W - 240, right = x + maxW;
+    var NO_START = "、。，．」』）！？・ー…ぁぃぅぇぉっゃゅょァィゥェォッャュョ";
+
+    function layout(g, draw, s, H) {
+      var y = 0;
+      function text(t, f, color, tx, ty, align) {
+        if (!draw) return;
+        g.font = f; g.fillStyle = color; g.textAlign = align || "left";
+        g.fillText(t, tx, ty); g.textAlign = "left";
+      }
+      function wrap(t, f) {
+        g.font = f;
+        var lines = [], cur = "";
+        for (var i = 0; i < t.length; i++) {
+          var ch = t[i];
+          if (cur && g.measureText(cur + ch).width > maxW && NO_START.indexOf(ch) < 0) { lines.push(cur); cur = ch; }
+          else cur += ch;
+        }
+        if (cur) lines.push(cur);
+        return lines;
+      }
+      function para(t, f, color, lh) {
+        wrap(t, f).forEach(function (l) { y += lh; text(l, f, color, x, y); });
+      }
+      function fitFont(t, weight, fam, size) {
+        var sz = size;
+        do { g.font = weight + " " + sz + "px " + fam; sz -= 2; } while (g.measureText(t).width > maxW && sz > 18);
+        return g.font;
+      }
+      function px(n) { return Math.round(n * s); }
+
+      // Title
+      y = 150;
+      if (draw) {
+        g.font = "400 48px " + F_DISP;
+        var tx = x;
+        [["死○がとう", rgb(IMG.shi)], ["／", IMG.muted], ["神がとう", rgb(IMG.kami)], ["診断", IMG.ink]].forEach(function (seg) {
+          g.fillStyle = seg[1]; g.fillText(seg[0], tx, y); tx += g.measureText(seg[0]).width;
+        });
+      }
+
+      // Type
+      y += 92; text("あなたはこんな人", "700 28px " + F_BODY, IMG.muted, x, y);
+      y += 100; text(d.type, fitFont(d.type, "400", F_DISP, 92), IMG.ink, x, y);
+      para(d.guard[0] + "　" + d.guard[1], "700 " + px(34) + "px " + F_BODY, IMG.ink, px(58));
+
+      // Trait tags
+      if (d.chips.length) {
+        y += 26;
+        var cx = x, top = y;
+        d.chips.forEach(function (c) {
+          g.font = "700 26px " + F_BODY;
+          var w = g.measureText(c.t).width + 44;
+          if (cx + w > right) { cx = x; top += 64; }
+          if (draw) {
+            rr(g, cx, top, w, 52, 26);
+            g.fillStyle = c.k ? IMG.kamiSoft : IMG.shiSoft; g.fill();
+          }
+          text(c.t, "700 26px " + F_BODY, c.k ? rgb(IMG.kami) : rgb(IMG.shi), cx + 22, top + 35);
+          cx += w + 12;
+        });
+        y = top + 52;
+      }
+
+      // Explanation
+      d.prose.forEach(function (p) { y += px(24); para(p, "500 " + px(30) + "px " + F_BODY, IMG.ink, px(52)); });
+
+      // Tip
+      y += px(44);
+      if (draw) {
+        g.save(); g.strokeStyle = IMG.rule; g.lineWidth = 2; g.setLineDash([6, 6]);
+        g.beginPath(); g.moveTo(x, y); g.lineTo(right, y); g.stroke(); g.restore();
+      }
+      y += px(48); text("あなたに良かれと思って何かするなら", "700 " + px(25) + "px " + F_BODY, IMG.muted, x, y);
+      para(d.tip, "900 " + px(32) + "px " + F_BODY, IMG.ink, px(54));
+
+      // Footer sits at the bottom of the card
+      var footY = Math.max(y + 110, (H || BASE_H) - 88);
+      text("#40HzP #死○がとう神がとう診断", "700 26px " + F_BODY, IMG.muted, x, footY);
+      text("40HzP", "400 30px " + F_DISP, IMG.ink, right, footY, "right");
+      return footY + 88;
+    }
+
+    var probe = document.createElement("canvas").getContext("2d");
+    var scale = 1, H = BASE_H;
+    for (var s = 1; s >= 0.7; s -= 0.05) {
+      scale = s;
+      H = layout(probe, false, s, BASE_H);
+      if (H <= BASE_H) break;
+    }
+    H = Math.max(BASE_H, Math.ceil(H));
+
+    var cv = document.createElement("canvas");
+    cv.width = W; cv.height = H;
+    var g = cv.getContext("2d");
+    g.textBaseline = "alphabetic";
+    g.fillStyle = IMG.paper; g.fillRect(0, 0, W, H);
+    rr(g, 48, 48, W - 96, H - 96, 40);
+    g.fillStyle = IMG.surface; g.fill();
+    g.lineWidth = 2; g.strokeStyle = IMG.rule; g.stroke();
+    layout(g, true, scale, H);
+    return cv;
+  }
+
+  // Full result: everything on the result screen, in the same order, as one tall image
+  function drawFull(d) {
+    var W = 1080, x = 120, maxW = W - 240, right = x + maxW;
+    var NO_START = "、。，．」』）！？・ー…ぁぃぅぇぉっゃゅょァィゥェォッャュョ";
+
+    function layout(g, draw, panels) {
+      var y = 0;
+      function text(t, f, color, tx, ty, align) {
+        if (!draw) return;
+        g.font = f; g.fillStyle = color; g.textAlign = align || "left";
+        g.fillText(t, tx, ty); g.textAlign = "left";
+      }
+      function wrap(t, f, w) {
+        g.font = f;
+        var lines = [], cur = "";
+        for (var i = 0; i < t.length; i++) {
+          var ch = t[i];
+          if (cur && g.measureText(cur + ch).width > w && NO_START.indexOf(ch) < 0) { lines.push(cur); cur = ch; }
+          else cur += ch;
+        }
+        if (cur) lines.push(cur);
+        return lines;
+      }
+      function para(t, f, color, lh) {
+        wrap(t, f, maxW).forEach(function (l) { y += lh; text(l, f, color, x, y); });
+      }
+      function fitFont(t, weight, fam, size) {
+        var s = size;
+        do { g.font = weight + " " + s + "px " + fam; s -= 2; } while (g.measureText(t).width > maxW && s > 18);
+        return g.font;
+      }
+      function cut(yy) {
+        if (!draw) return;
+        var label = "ここから死○がとう";
+        g.font = "700 26px " + F_BODY;
+        var lw = g.measureText(label).width, mid = x + maxW / 2;
+        g.save();
+        g.strokeStyle = IMG.line; g.lineWidth = 3; g.setLineDash([14, 10]);
+        g.beginPath(); g.moveTo(x, yy); g.lineTo(mid - lw / 2 - 18, yy);
+        g.moveTo(mid + lw / 2 + 18, yy); g.lineTo(right, yy); g.stroke();
+        g.restore();
+        text(label, "700 26px " + F_BODY, IMG.line, mid, yy + 9, "center");
+      }
+      function heading(label, sub) {
+        y += 96;
+        text(label, "900 32px " + F_BODY, IMG.ink, x, y);
+        if (sub) {
+          g.font = "900 32px " + F_BODY;
+          text(sub, "500 22px " + F_BODY, IMG.muted, x + g.measureText(label).width + 16, y);
+        }
+      }
+
+      // Title
+      y = 150;
+      if (draw) {
+        g.font = "400 48px " + F_DISP;
+        var tx = x;
+        [["死○がとう", rgb(IMG.shi)], ["／", IMG.muted], ["神がとう", rgb(IMG.kami)], ["診断", IMG.ink]].forEach(function (s) {
+          g.fillStyle = s[1]; g.fillText(s[0], tx, y); tx += g.measureText(s[0]).width;
+        });
+      }
+
+      // Boundary verdict
+      y += 84;
+      text("あなたの境界線は", "700 28px " + F_BODY, IMG.muted, x, y);
+      if (d.above && d.below) {
+        var a = "「" + d.above + "」", b = "「" + d.below + "」";
+        y += 78; text(a, fitFont(a, "400", F_DISP, 52), rgb(IMG.kami), x, y);
+        y += 50; cut(y);
+        y += 82; text(b, fitFont(b, "400", F_DISP, 52), rgb(IMG.shi), x, y);
+      } else if (d.allOk) {
+        y += 78; text("見つかりませんでした", "400 52px " + F_DISP, rgb(IMG.kami), x, y);
+      } else {
+        y += 44; cut(y);
+        y += 82; text("1問目から", "400 52px " + F_DISP, rgb(IMG.shi), x, y);
+      }
+      para(d.tail, "700 30px " + F_BODY, IMG.ink, 56);
+
+      // Profile (set off on a tinted panel)
+      y += 60;
+      var p0 = y;
+      y += 70; text("あなたはこんな人", "700 24px " + F_BODY, IMG.muted, x, y);
+      y += 92; text(d.type, fitFont(d.type, "400", F_DISP, 76), IMG.ink, x, y);
+      para(d.guard[0] + "　" + d.guard[1], "700 30px " + F_BODY, IMG.ink, 54);
+      if (d.chips.length) {
+        y += 24;
+        var cx = x, top = y;
+        g.font = "700 26px " + F_BODY;
+        d.chips.forEach(function (c) {
+          g.font = "700 26px " + F_BODY;
+          var w = g.measureText(c.t).width + 44;
+          if (cx + w > right) { cx = x; top += 64; }
+          if (draw) {
+            rr(g, cx, top, w, 52, 26);
+            g.fillStyle = c.k ? IMG.kamiSoft : IMG.shiSoft; g.fill();
+          }
+          text(c.t, "700 26px " + F_BODY, c.k ? rgb(IMG.kami) : rgb(IMG.shi), cx + 22, top + 35);
+          cx += w + 12;
+        });
+        y = top + 52;
+      }
+      d.prose.forEach(function (p) { y += 22; para(p, "500 29px " + F_BODY, IMG.ink, 52); });
+      y += 44;
+      if (draw) {
+        g.save(); g.strokeStyle = IMG.rule; g.lineWidth = 2; g.setLineDash([6, 6]);
+        g.beginPath(); g.moveTo(x, y); g.lineTo(right, y); g.stroke(); g.restore();
+      }
+      y += 48; text("あなたに良かれと思って何かするなら", "700 24px " + F_BODY, IMG.muted, x, y);
+      para(d.tip, "900 30px " + F_BODY, IMG.ink, 52);
+      y += 52;
+      panels.push({ y: p0, h: y - p0 });
+
+      // Tally
+      y += 50;
+      var bw = (maxW - 32) / 3, bh = 140;
+      [[d.tally.kami, "神がとう（4〜5）", rgb(IMG.kami)], [d.tally.mid, "どちらでもない（3）", IMG.ink], [d.tally.shi, "死○がとう（1〜2）", rgb(IMG.shi)]].forEach(function (t, i) {
+        var bx = x + i * (bw + 16);
+        if (draw) { rr(g, bx, y, bw, bh, 20); g.lineWidth = 2; g.strokeStyle = IMG.rule; g.stroke(); }
+        text(String(t[0]), "900 60px " + F_BODY, t[2], bx + bw / 2, y + 82, "center");
+        text(t[1], "700 22px " + F_BODY, IMG.muted, bx + bw / 2, y + 120, "center");
+      });
+      y += bh;
+
+      // Ladder with the boundary drawn in
+      heading("境界線", "点数の高い順");
+      y += 10;
+      var drawn = false;
+      d.ranked.forEach(function (r) {
+        if (!drawn && r.v <= 2 && d.split) { y += 56; cut(y - 14); drawn = true; }
+        y += 56;
+        if (draw) { rr(g, x, y - 38, 60, 44, 10); g.fillStyle = mixScore(r.v); g.fill(); }
+        text(String(r.v), "900 26px " + F_BODY, IMG.surface, x + 30, y - 7, "center");
+        text(r.s, "500 28px " + F_BODY, IMG.ink, x + 82, y - 6);
+      });
+
+      // Category averages
+      heading("カテゴリ別", "平均点・点線が3");
+      y += 20;
+      var tx0 = x + 230, tx1 = right - 110;
+      d.avgs.forEach(function (a) {
+        y += 60;
+        var ry = y - 10;
+        text(a.name, "700 30px " + F_BODY, IMG.ink, x, ry + 10);
+        if (draw) {
+          var grad = g.createLinearGradient(tx0, 0, tx1, 0);
+          grad.addColorStop(0, IMG.shiSoft); grad.addColorStop(1, IMG.kamiSoft);
+          rr(g, tx0, ry - 8, tx1 - tx0, 16, 8); g.fillStyle = grad; g.fill();
+          var midX = (tx0 + tx1) / 2;
+          g.save(); g.strokeStyle = IMG.line; g.globalAlpha = 0.7; g.lineWidth = 2; g.setLineDash([4, 4]);
+          g.beginPath(); g.moveTo(midX, ry - 14); g.lineTo(midX, ry + 14); g.stroke(); g.restore();
+          var dx = tx0 + (a.avg - 1) / 4 * (tx1 - tx0);
+          g.beginPath(); g.arc(dx, ry, 16, 0, Math.PI * 2);
+          g.fillStyle = mixScore(a.avg); g.fill();
+          g.lineWidth = 5; g.strokeStyle = IMG.surface; g.stroke();
+        }
+        text(a.avg.toFixed(1), "900 32px " + F_BODY, IMG.ink, right, ry + 11, "right");
+      });
+      y += 44;
+      text("1 死○がとう", "500 20px " + F_BODY, IMG.muted, tx0, y);
+      text("神がとう 5", "500 20px " + F_BODY, IMG.muted, tx1, y, "right");
+      y += 10;
+      d.notes.forEach(function (n) { para(n, "700 28px " + F_BODY, IMG.ink, 50); });
+
+      // Footer
+      y += 100;
+      text("#40HzP #死○がとう神がとう診断", "700 26px " + F_BODY, IMG.muted, x, y);
+      text("40HzP", "400 30px " + F_DISP, IMG.ink, right, y, "right");
+      return y + 110;
+    }
+
+    var panels = [];
+    var H = Math.ceil(layout(document.createElement("canvas").getContext("2d"), false, panels));
+    var cv = document.createElement("canvas");
+    cv.width = W; cv.height = H;
+    var g = cv.getContext("2d");
+    g.textBaseline = "alphabetic";
+    g.fillStyle = IMG.paper; g.fillRect(0, 0, W, H);
+    rr(g, 48, 48, W - 96, H - 96, 40);
+    g.fillStyle = IMG.surface; g.fill();
+    g.lineWidth = 2; g.strokeStyle = IMG.rule; g.stroke();
+    panels.forEach(function (p) { rr(g, x - 40, p.y, maxW + 80, p.h, 28); g.fillStyle = IMG.paper; g.fill(); });
+    layout(g, true, []);
+    return cv;
+  }
+
+  function refreshPreview() {
+    $("tabcard").setAttribute("aria-pressed", view === "card" ? "true" : "false");
+    $("tabfull").setAttribute("aria-pressed", view === "full" ? "true" : "false");
+    var b = blobs[view];
+    if (b) {
+      if (!urls[view]) urls[view] = URL.createObjectURL(b);
+      $("previewimg").src = urls[view];
+      $("previewimg").alt = view === "card" ? "シェア用の診断結果画像" : "診断結果全体の画像";
+      $("preview").hidden = false;
+    }
+    syncSave();
+  }
+
+  function fileName() {
+    return view === "card" ? "kamigatou-result.png" : "kamigatou-full.png";
+  }
+  function asFile(b) {
+    try { return new File([b], fileName(), { type: "image/png" }); } catch (e) { return null; }
+  }
+  function canShareFile(b) {
+    var f = asFile(b);
+    try { return !!(f && navigator.canShare && navigator.canShare({ files: [f] })); } catch (e) { return false; }
+  }
+
+  function syncSave() {
+    var b = blobs[view];
+    $("saveimg").hidden = !b;
+    $("shareimg").hidden = !(b && canShareFile(b));
+    $("previewcap").textContent = "「画像を保存」でダウンロードできます。スマホは画像の長押しでも保存できます";
+  }
+
+  function saveImage() {
+    var b = blobs[view];
+    if (!b) return;
+    if (!urls[view]) urls[view] = URL.createObjectURL(b);
+    var a = document.createElement("a");
+    a.href = urls[view];
+    a.download = fileName();
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    $("toast").textContent = "画像を保存しました。見つからない場合は、画像を長押し（PCは右クリック）して保存してください";
+  }
+
+  function shareImage() {
+    var b = blobs[view];
+    var f = b && asFile(b);
+    if (!f) return;
+    navigator.share({ files: [f], text: $("sharetext").value }).then(function () {
+      $("toast").textContent = "";
+    }, function () {});
+  }
+
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+
+  function copyShare() {
+    var ta = $("sharetext");
+    var done = function () { $("toast").textContent = "コピーしました"; };
+    var fallback = function () {
+      ta.focus(); ta.select();
+      $("toast").textContent = "文章を選択しました。コピーして使ってください";
+    };
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(ta.value).then(done, fallback);
+      } else { fallback(); }
+    } catch (e) { fallback(); }
+  }
+
+  $("start").addEventListener("click", start);
+  $("again").addEventListener("click", start);
+  $("back").addEventListener("click", back);
+  $("copy").addEventListener("click", copyShare);
+  $("saveimg").addEventListener("click", saveImage);
+  $("shareimg").addEventListener("click", shareImage);
+  $("tabcard").addEventListener("click", function () { view = "card"; refreshPreview(); });
+  $("tabfull").addEventListener("click", function () { view = "full"; refreshPreview(); });
+  $("scale").addEventListener("click", function (e) {
+    var b = e.target.closest(".step");
+    if (b) answer(Number(b.dataset.v));
+  });
+  document.addEventListener("keydown", function (e) {
+    if ($("quiz").hidden) return;
+    if (e.key >= "1" && e.key <= "5") answer(Number(e.key));
+    else if (e.key === "Backspace" || e.key === "ArrowLeft") back();
+  });
+})();
+</script>
+
+</body>
+</html>
