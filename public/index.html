@@ -650,7 +650,7 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
     $("ptip").textContent = tip;
 
     // Share
-    var text = "死○がとう／神がとう診断\n私は「" + stance.name + "」\n" + shareLine + "\n#40HzP #死○がとう神がとう診断";
+    var text = "死○がとう／神がとう診断\n私は「" + stance.name + "」\n" + shareLine + "\n#40HzP #神がとう診断";
     $("sharetext").value = text;
     $("xlink").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(SITE_URL);
     $("toast").textContent = "";
@@ -811,7 +811,7 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
 
       // Footer sits at the bottom of the card
       var footY = Math.max(y + 110, (H || BASE_H) - 88);
-      text("#40HzP #死○がとう神がとう診断", "700 26px " + F_BODY, IMG.muted, x, footY);
+      text("#40HzP #神がとう診断", "700 26px " + F_BODY, IMG.muted, x, footY);
       text("40HzP", "400 30px " + F_DISP, IMG.ink, right, footY, "right");
       return footY + 88;
     }
@@ -1002,7 +1002,7 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
 
       // Footer
       y += 100;
-      text("#40HzP #死○がとう神がとう診断", "700 26px " + F_BODY, IMG.muted, x, y);
+      text("#40HzP #神がとう診断", "700 26px " + F_BODY, IMG.muted, x, y);
       text("40HzP", "400 30px " + F_DISP, IMG.ink, right, y, "right");
       return y + 110;
     }
