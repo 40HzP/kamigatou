@@ -214,6 +214,10 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
 .tip .h { font-size: 12px; letter-spacing: 0.12em; color: var(--muted); }
 .tip p { font-size: 15px; font-weight: 700; }
 
+.sharedbar { border-color: color-mix(in oklab, var(--kami) 45%, var(--rule)); background: color-mix(in oklab, var(--kami-soft) 55%, var(--surface)); }
+.sharedbar .eyebrow { font-size: 12px; letter-spacing: 0.14em; color: var(--kami); font-weight: 700; }
+#sharedend p, .sharedbar p { font-size: 15px; }
+
 .foot { font-size: 12px; color: var(--muted); text-align: center; letter-spacing: 0.08em; padding-top: 8px; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -277,20 +281,28 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
 
   <!-- 3. Result -->
   <section id="result" class="wrap" style="gap:28px" hidden>
+    <div class="panel sharedbar" id="sharedtop" hidden>
+      <span class="eyebrow">シェアされた診断結果</span>
+      <p>良かれと思っての25の行動に、この人が1〜5で答えた結果です。あなたの境界線はどこにある？</p>
+      <div class="row" style="justify-content:flex-start">
+        <button class="primary" id="tryown" type="button">自分もやってみる</button>
+      </div>
+    </div>
+
     <div class="verdict">
-      <span class="label">あなたの境界線は</span>
+      <span class="label" id="lverdict">あなたの境界線は</span>
       <div class="pair" id="pair"></div>
       <p class="tail" id="tail"></p>
     </div>
 
     <div class="panel profile" id="profile">
-      <span class="eyebrow">あなたはこんな人</span>
+      <span class="eyebrow" id="lprofile">あなたはこんな人</span>
       <h2 class="type" id="ptype"></h2>
       <p class="guard" id="pguard"></p>
       <div class="chips" id="pchips"></div>
       <div class="prose" id="pprose"></div>
       <div class="tip">
-        <span class="h">あなたに良かれと思って何かするなら</span>
+        <span class="h" id="ltip">あなたに良かれと思って何かするなら</span>
         <p id="ptip"></p>
       </div>
     </div>
@@ -308,7 +320,15 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
       <div class="notes" id="notes"></div>
     </div>
 
-    <div class="panel">
+    <div class="panel" id="sharedend" hidden>
+      <h2 class="sec">あなたの境界線は？</h2>
+      <p>同じ25問に答えると、この人の結果と見比べられます。約3分です。</p>
+      <div class="row" style="justify-content:flex-start">
+        <button class="primary" id="tryown2" type="button">自分もやってみる</button>
+      </div>
+    </div>
+
+    <div class="panel" id="sharepanel">
       <h2 class="sec">結果をシェア</h2>
       <figure class="preview" id="preview" hidden>
         <div class="tabs" role="group" aria-label="画像の種類">
@@ -449,7 +469,42 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
     window.scrollTo(0, 0);
   }
 
+  // ---------- Result links: ?r= holds the 25 answers in question order ----------
+  var MINE_KEY = "kamigatou.mine";
+  var shared = false;
+
+  function encodeAnswers() {
+    return QUESTIONS.map(function (_, i) { return answers[i]; }).join("");
+  }
+  function decodeAnswers(code) {
+    if (typeof code !== "string" || code.length !== QUESTIONS.length || !/^[1-5]+$/.test(code)) return null;
+    var a = {};
+    for (var i = 0; i < code.length; i++) a[i] = Number(code[i]);
+    return a;
+  }
+  function resultUrl(code) { return SITE_URL + "?r=" + code; }
+  function setAddress(query) {
+    try { history.replaceState(null, "", location.pathname + query); } catch (e) {}
+  }
+  function readMine() {
+    try { return localStorage.getItem(MINE_KEY); } catch (e) { return null; }
+  }
+  function writeMine(code) {
+    try { localStorage.setItem(MINE_KEY, code); } catch (e) {}
+  }
+
+  // On someone else's result, the page talks about "この人" instead of "あなた"
+  function swapWho(root) {
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var n;
+    while ((n = w.nextNode())) {
+      if (n.nodeValue.indexOf("あなた") >= 0) n.nodeValue = n.nodeValue.replace(/あなた/g, "この人");
+    }
+  }
+
   function start() {
+    shared = false;
+    setAddress("");
     order = shuffle(QUESTIONS.map(function (_, i) { return i; }));
     answers = {};
     idx = 0;
@@ -492,6 +547,15 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
   }
 
   function finish() {
+    var code = encodeAnswers();
+    if (!shared) { writeMine(code); setAddress("?r=" + code); }
+    $("lverdict").textContent = "あなたの境界線は";
+    $("lprofile").textContent = "あなたはこんな人";
+    $("ltip").textContent = "あなたに良かれと思って何かするなら";
+    $("sharedtop").hidden = !shared;
+    $("sharedend").hidden = !shared;
+    $("sharepanel").hidden = shared;
+
     // Rank: high score first; ties keep the category order so results are stable
     var ranked = QUESTIONS.map(function (q, i) { return { i: i, q: q, v: answers[i] }; })
       .sort(function (a, b) { return b.v - a.v || a.i - b.i; });
@@ -650,12 +714,17 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
     $("ptip").textContent = tip;
 
     // Share
-    var text = "死○がとう／神がとう診断\n私は「" + stance.name + "」\n" + shareLine + "\n" + SITE_URL + "\n#40HzP #神がとう診断";
+    var text = "死○がとう／神がとう診断\n私は「" + stance.name + "」\n" + shareLine + "\n" + resultUrl(code) + "\n#40HzP #神がとう診断";
     $("sharetext").value = text;
     $("xlink").href = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text);
     $("toast").textContent = "";
 
     show("result");
+
+    if (shared) {
+      ["lverdict", "lprofile", "ltip", "pair", "tail", "pguard", "pprose", "ptip", "notes"].forEach(function (id) { swapWho($(id)); });
+      return;
+    }
 
     // Result image
     var chipList = [];
@@ -1098,6 +1167,8 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
 
   $("start").addEventListener("click", start);
   $("again").addEventListener("click", start);
+  $("tryown").addEventListener("click", start);
+  $("tryown2").addEventListener("click", start);
   $("back").addEventListener("click", back);
   $("copy").addEventListener("click", copyShare);
   $("saveimg").addEventListener("click", saveImage);
@@ -1113,6 +1184,17 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
     if (e.key >= "1" && e.key <= "5") answer(Number(e.key));
     else if (e.key === "Backspace" || e.key === "ArrowLeft") back();
   });
+
+  // Opened from a shared link: show that result right away
+  (function () {
+    var code = null;
+    try { code = new URLSearchParams(location.search).get("r"); } catch (e) {}
+    var a = decodeAnswers(code);
+    if (!a) { if (code != null) setAddress(""); return; }
+    answers = a;
+    shared = readMine() !== code;
+    finish();
+  })();
 })();
 </script>
 
