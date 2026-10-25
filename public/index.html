@@ -332,8 +332,8 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
       <h2 class="sec">結果をシェア</h2>
       <figure class="preview" id="preview" hidden>
         <div class="tabs" role="group" aria-label="画像の種類">
-          <button type="button" id="tabcard" aria-pressed="true">シェア用</button>
-          <button type="button" id="tabfull" aria-pressed="false">結果全体</button>
+          <button type="button" id="tabfull" aria-pressed="true">結果全体</button>
+          <button type="button" id="tabcard" aria-pressed="false">シェア用</button>
         </div>
         <div class="frame"><img id="previewimg" alt="診断結果の画像"></div>
         <figcaption id="previewcap"></figcaption>
@@ -754,7 +754,7 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
   // ---------- Result image (drawn on canvas, fixed light palette) ----------
   var blobs = { card: null, full: null };
   var urls = {};
-  var view = "card";
+  var view = "full";
   var IMG = {
     paper: "#eef0f4", surface: "#ffffff", ink: "#1c1f2e", muted: "#666b80", rule: "#dadde6",
     kami: [185, 128, 12], kamiSoft: "#f5e6c0", shi: [75, 80, 128], shiSoft: "#e0e2ef", line: "#cf3a2c"
@@ -785,6 +785,7 @@ h2.sec small { font-size: 12px; font-weight: 500; color: var(--muted); letter-sp
     Object.keys(urls).forEach(function (k) { URL.revokeObjectURL(urls[k]); });
     urls = {};
     blobs = { card: null, full: null };
+    view = "full";
     $("preview").hidden = true;
     var fonts = document.fonts && document.fonts.load ? Promise.all([
       document.fonts.load('400 60px "Dela Gothic One"', "死神診断「」"),
